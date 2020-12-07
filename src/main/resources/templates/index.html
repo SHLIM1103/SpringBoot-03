@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>HOME</h1>
+    <a id="write" href="#">글 작성하기</a>
+    <a id="detail" href="#">글 상세보기</a>
+    <a id="list" href="#">글 목록보기</a>
+    <a id="update" href="#">글 수정하기</a>
+</body>
+<script>
+    document.getElementById('write').addEventListener('click', e => {location.href='/move/articles/write'})
+    document.getElementById('detail').addEventListener('click', e => {location.href='/move/articles/detail'})
+    document.getElementById('list').addEventListener('click', e => {location.href='/move/articles/list'})
+    document.getElementById('update').addEventListener('click', e => {location.href='/move/articles/update'})
+</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {border: 1px solid black;}
+        table tr {border: 1px solid black;}
+        table tr td {border: 1px solid black;}
+        table tr th {border: 1px solid black;}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>글 목록보기</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">글번호</th>
+                <th class="text-center">제목</th>
+                <th class="text-center">작성자ID</th>
+                <th class="text-center">작성일</th>
+                <th class="text-center">조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
+            </tr>
+        </tbody>
+        <button id="home-btn">HOME</button>
+    <script>
+        document.getElementById('home-btn').addEventListener('click', e => {location.href='/'})
+    </script>
+</body>
+</html>

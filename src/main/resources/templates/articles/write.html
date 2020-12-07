@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    table {border: 1px solid black;}
+        table tr {border: 1px solid black;}
+        table tr td {border: 1px solid black;}
+        table tr td {border: 1px solid black;}
+        table tr td tr {border: 1px solid black;}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>글 작성하기</h1>
+    <form>
+        <input id="writerId" type="text" name="id" class="form-control mt-4 mb-2" placeholder="작성자ID" required><br>
+        <input id="title" type="text" name="bdTitle" class="form-control mt-4 mb-2" placeholder="제목" required>
+        <div class="form-group">
+            <textarea id="content" class="form-control" rows="10" name="bdContent" placeholder="내용" required></textarea>
+        </div>
+        <button id="submit-btn" class="btn btn-secondary mb-3">제출하기</button>
+        <button id="home-btn">HOME</button>
+    </form>
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', e => {
+            $.ajax({
+                url: '/article',
+                type: 'POST',
+                data: JSON.stringify({writerId: document.getElementById('writerId').value,
+                                      title: document.getElementById('title').value,
+                                      content: document.getElementById('content').value,}),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: d => {
+                    if(d.message === "SUCCESS"){
+                        alert(`작성완료!`)
+                        location.href='/move/article/list'
+                    }else{
+                        location.href='/move/articles/write'
+                        alert(`작성실패! 다시 작성해주세요.`)
+                    }
+                },
+                error: e => {
+                    alert(`글쓰기 에러 발생: ${e}`)
+                }
+            })
+        })
+        document.getElementById('home-btn').addEventListener('click', e => {location.href='/'})
+    </script>
+</body>
+</html>
