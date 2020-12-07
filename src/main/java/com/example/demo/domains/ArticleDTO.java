@@ -7,5 +7,5 @@ import lombok.Setter;
 
 @Component @Getter @Setter
 public class ArticleDTO {
-    
+    String artNum, writerId, title, content, regDate;
 }
