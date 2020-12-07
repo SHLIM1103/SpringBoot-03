@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>WRITE ARTICLE</h1>
+    <form>
+        <input type="text" name="writerid" class="form-control mt-4 mb-2"
+            placeholder="작성자ID" required>
+        <input type="text" name="title" class="form-control mt-4 mb-2"
+            placeholder="제목" required>
+        <div class="form-group">
+            <textarea class="form-control" rows="10" name="content"
+                placeholder="내용" required></textarea>
+        </div>
+        <button type="submit-btn" class="btn btn-secondary mb-3">제출하기</button>
+        <button type="home-btn">HOME</button>
+    </form>
+    <script>
+        document.getElementById('home-btn').addEventListener('click', e => {location.href='/'})
+        document.getElementById('submit-btn').addEventListener('click', e => {
+            $.ajax({
+                url: '/articles',
+                type: 'POST',
+                data: JSON.stringify({writerid: document.getElementById('writerid').value,
+                                      title: document.getElementById('title').value,
+                                      content: document.getElementById('content').value}),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: d => {
+                    if(d.message === "SUCCESS"){
+                        alert(`글 작성 성공!`)
+                        location.href='/'
+                    }else{
+                        alert(`작성 실패! 다시 작성해주세요.`)
+                        location.href='/move/article/write'
+                    }
+                },
+                error: e => {
+                    alert(`글 작성 에러 발생: ${e}`)
+                }
+            })
+        })
+    </script>
+</body>
+</html>
