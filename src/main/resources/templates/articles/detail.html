@@ -8,6 +8,7 @@
         table {border: 1px solid black;}
         table tr {border: 1px solid black;}
         table tr td {border: 1px solid black;}
+        table tr td tr {border: 1px solid black;}
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -16,16 +17,16 @@
     <table class="table">
         <thead>
             <tr class="table-active">
-                <th scope="col" style="width: 60%"><br>
-                    </th>
-                <th scope="col" style="width: 40%" class="text-right">조회 :
-                    <br></th>
+                <th style="width: 10%">글번호: <span id="artNum">1</span></th>
+                <th style="width: 30%">작성자ID: <span id="writerId">hong</span></th>
+                <th style="width: 30%">작성일: <span id="regDate">2020-12-07</span></th>
+                <th style="width: 30%">조회수: <span id="count">30</span><br></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><pre></pre></td>
-            </tr>
+            <tr><td colspan="4" style="width: 100%"><span id="title"></span>제목</td><br>
+            <tr><td colspan="4" style="width: 100%">
+                <textarea id="content">게시글 테스트</textarea></td></tr>
         </tbody>
     </table>
     <button id="home-btn" href="#">HOME</button>

@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    </head>
-    <body>
-        <button id="home-btn" href="#">HOME</button>
-        <script>
-            document.getElementById('home-btn').addEventListener('click', e => {location.href = '/'})
-        </script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {border: 1px solid black;}
+        table tr {border: 1px solid black;}
+        table tr td {border: 1px solid black;}
+        table tr td tr {border: 1px solid black;}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Update Article</h1>
+    <table class="table">
+        <thead>
+            <tr class="table-active">
+                <th style="width: 10%">글번호: <span id="artNum">1</span></th>
+                <th style="width: 30%">작성자ID: <span id="writerId">hong</span></th>
+                <th style="width: 30%">수정일: <span id="regDate">2020-12-07</span></th>
+                <th style="width: 30%">조회수: <span id="count">30</span><br></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td colspan="4" style="width: 100%"><span id="title"></span>수정할 제목</td><br>
+            <tr><td colspan="4" style="width: 100%">
+                <textarea id="content">수정할 내용</textarea></td></tr>
+        </tbody>
+    </table>
+    <button id="home-btn" href="#">HOME</button>
+</body>
+<script>
+    document.getElementById('home-btn').addEventListener('click', e => {location.href='/'})
+</script>
 </html>

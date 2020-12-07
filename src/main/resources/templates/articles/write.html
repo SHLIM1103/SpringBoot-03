@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    <style>
+        table {border: 1px solid black;}
+        table tr {border: 1px solid black;}
+        table tr td {border: 1px solid black;}
+        table tr td tr {border: 1px solid black;}
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -13,13 +18,13 @@
         <input type="hidden" name="bdGroup">
         <input type="hidden" name="bdOrder">
         <input type="hidden" name="bdIndent">
+        <input type="text" name="id" class="form-control mt-4 mb-2"
+            placeholder="ID를 입력해주세요." required><br>
         <input type="text" name="bdTitle" class="form-control mt-4 mb-2"
-            placeholder="제목을 입력해주세요." required
-        >
+            placeholder="제목을 입력해주세요." required>
         <div class="form-group">
             <textarea class="form-control" rows="10" name="bdContent"
-                placeholder="내용을 입력해주세요" required
-            ></textarea>
+                placeholder="내용을 입력해주세요" required></textarea>
         </div>
         <button class="btn btn-secondary mb-3">제출하기</button>
         <button id="home-btn">HOME</button>
