@@ -15,21 +15,40 @@
 <body>
     <h1>Add Article</h1>
     <form>
-        <input type="hidden" name="bdGroup">
-        <input type="hidden" name="bdOrder">
-        <input type="hidden" name="bdIndent">
-        <input type="text" name="id" class="form-control mt-4 mb-2"
+        <input id="writerId" type="text" name="id" class="form-control mt-4 mb-2"
             placeholder="ID를 입력해주세요." required><br>
-        <input type="text" name="bdTitle" class="form-control mt-4 mb-2"
+        <input id="title" type="text" name="bdTitle" class="form-control mt-4 mb-2"
             placeholder="제목을 입력해주세요." required>
         <div class="form-group">
-            <textarea class="form-control" rows="10" name="bdContent"
+            <textarea id="content" class="form-control" rows="10" name="bdContent"
                 placeholder="내용을 입력해주세요" required></textarea>
         </div>
-        <button class="btn btn-secondary mb-3">제출하기</button>
+        <button id="regi-btn" class="btn btn-secondary mb-3">제출하기</button>
         <button id="home-btn">HOME</button>
     </form>
     <script>
+        document.getElementById('regi-btn').addEventListener('click', e => {
+            e.preventDefault()
+            $.ajax({
+                url: '/ariticles',
+                type: 'POST',
+                data: JSON.stringify({writerId: document.getElementById('writerId').value,
+                                      title: document.getElementById('title').value,
+                                      content: document.getElementById('content').value}),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: d => {
+                    if(d.message === 'SUCCESS'){
+
+                    }else{
+
+                    }
+                },
+                error: e => {
+                    alert(`글작성 에러 발생: ${e}`)
+                }
+            })
+        })
         document.getElementById('home-btn').addEventListener('click', e => {location.href='/'})
     </script>
 </body>

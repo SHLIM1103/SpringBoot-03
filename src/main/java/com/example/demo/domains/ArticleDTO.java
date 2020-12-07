@@ -1,11 +1,9 @@
 package com.example.demo.domains;
 
 import org.springframework.stereotype.Component;
+import lombok.Data;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Component @Getter @Setter
+@Component @Data
 public class ArticleDTO {
     String artNum, writerId, title, content, regDate, count;
 }

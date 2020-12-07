@@ -6,6 +6,7 @@ import java.util.Map;
 import com.example.demo.Services.ArticleService;
 import com.example.demo.domains.ArticleDTO;
 import com.example.demo.utils.Printer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
         @Autowired Printer printer;
         @Autowired ArticleService articleService;
-        @PostMapping
+        @PostMapping("/ariticles")
         public Map<?, ?> write(@RequestBody ArticleDTO article){
             var map = new HashMap<>();
             int result = articleService.write(article);
