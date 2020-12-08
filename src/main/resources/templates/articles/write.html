@@ -39,9 +39,10 @@
                 contentType: 'application/json',
                 success: d => {
                     if(d.message === 'SUCCESS'){
-
+                        location.href='/move/articles/list'
                     }else{
-
+                        alert(`글쓰기에 실패했습니다. 다시 시도해주세요.`)
+                        location.href='/move/articles/write'
                     }
                 },
                 error: e => {

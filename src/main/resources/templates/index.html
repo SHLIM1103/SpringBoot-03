@@ -8,12 +8,16 @@
 <body>
     <h1>HOME</h1>
     <a id="write" href="#">글 쓰기</a>
+    <a id="crawling" href="#">웹 크롤링</a>
     <a id="list" href="#">글 목록보기</a>
     <a id="detail" href="#">글 상세보기</a>
     <a id="update" href="#">글 수정하기</a>
 </body>
 <script>
     document.getElementById('write').addEventListener('click', e => {location.href='/move/articles/write'})
+    document.getElementById('crawling').addEventListener('click', e => {
+        $.getJSON('/articles/crawling/bugs', d => {d.count})
+    })
     document.getElementById('list').addEventListener('click', e => {location.href='/move/articles/list'})
     document.getElementById('detail').addEventListener('click', e => {location.href='/move/articles/detail'})
     document.getElementById('update').addEventListener('click', e => {location.href='/move/articles/update'})

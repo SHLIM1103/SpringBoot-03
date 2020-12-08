@@ -8,7 +8,7 @@
         table {border: 1px solid black;}
         table tr {border: 1px solid black;}
         table tr td {border: 1px solid black;}
-        table tr td tr {border: 1px solid black;}
+        table tr th {border: 1px solid black;}
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -27,16 +27,19 @@
         <tbody>
             <tr>
                 <td class="text-center"></td>
-                <td class="text-center">제목테스트</td>
-                <td class="text-center">글쓴이테스트</td>
-                <td class="text-center">작성일테스트</td>
-                <td class="text-center">조회수테스트</td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
             </tr>
         </tbody>
     </table>
     <button id="home-btn">HOME</button>
         <script>
             document.getElementById('home-btn').addEventListener('click', e => {location.href='/'})
+            $.getJSON('/articles/crawling', d => {
+                alert(`등록된 게시글 수: ${d.count}`)
+            }) 
         </script>
 </body>
 </html>
