@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>HOME</h1>
+    <a id="write" href="#">글 쓰기</a>
+    <a id="crawling" href="#">웹 크롤링</a>
+    <a id="list" href="#">글 목록보기</a>
+    <a id="detail" href="#">글 상세보기</a>
+    <a id="update" href="#">글 수정하기</a>
+</body>
+<script>
+    $('.write').click(e => {location.href='/move/articles/write'})
+    $('.crawling').click(e => {$.getJSON('/articles/crawling/bugs', d => alert(`등록된 게시글수${d.count}`))})
+    $('.list').click(e => {location.href='/move/articles/list'})
+    $('.detail').click(e => {location.href='/move/articles/detail'})
+    $('.update').click(e => {location.href='/move/articles/update'})
+</script>
+</html>
