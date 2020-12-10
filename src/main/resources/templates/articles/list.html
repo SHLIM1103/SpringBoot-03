@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        table {border: 1px solid black;}
+        table tr {border: 1px solid black;}
+        table tr td {border: 1px solid black;}
+        table tr th {border: 1px solid black;}
+    </style>
+</head>
+<body>
+    <h1>Article List</h1>
+    <table class="table table-hover">
+        <thead> 
+            <tr>
+                <th class="text-center">글번호</th>
+                <th class="text-center">제목</th>
+                <th class="text-center">글쓴이</th>
+                <th class="text-center">작성일</th>
+                <th class="text-center">조회수</th>
+            </tr>
+        </thead>
+        <tbody id="tb">
+        </tbody>
+    </table>
+    <button id="home-btn">HOME</button>
+    <script>
+        $('#home-btn').click(e => {location.href="/"})
+
+        $.getJSON('/articles', d => {
+        if(d.count != 0 ){
+            const list = d.list
+            let tr = ''
+            let i = 0
+            for(; i< d.count; i++){
+                tr += '<tr>'
+                    +'<td class="text-center">'+list[i].artNum+'</td>'
+                    +'<td class="text-center"><a class="title" id="'+list[i].artNum+'" href="#" >'+list[i].title+'</a></td>'
+                    +'<td class="text-center">'+list[i].writerId+'</td>'
+                    +'<td class="text-center">'+list[i].regDate+'</td>'
+                    +'<td class="text-center">'+list[i].count+'</td>'
+                    +'</tr>'
+            }
+            $('#tb').html(tr)
+            $('.title').each(function(i) {
+                $(this).click(e => {
+                    e.preventDefault()
+                    localStorage.setItem('artNum', `${this.id}`)
+                    $.getJSON(`/articles/${this.id}/count`, d => {
+                        if(d.message === 'SUCCESS'){
+                            location.href='/move/articles/detail'
+                        }
+                    })
+                })
+            })
+        }else{
+            alert(`목록 실패`)
+            $(".artNum").text('조회결과 없음')
+            $(".title").text('조회결과 없음')
+            $(".writerId").text('조회결과 없음')
+            $(".regDate").text('조회결과 없음')
+            $(".count").text('조회결과 없음')
+        }
+    })
+    </script>
+</body>
+</html>

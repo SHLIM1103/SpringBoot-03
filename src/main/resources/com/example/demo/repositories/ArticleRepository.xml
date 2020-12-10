@@ -1,0 +1,30 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repositories.ArticleRepository">
+    <insert id="insert" parameterType="com.example.demo.domains.ArticleDTO">
+        insert into articles (writer_id, title, content, reg_date, count) values
+        (#{writerId}, #{title}, #{content}, #{regDate}, #{count})
+    </insert>
+    <select id="count" resultType="int">
+        select count(*) from articles
+    </select>
+    <select id="selectAll" resultType="com.example.demo.domains.ArticleDTO">
+        select art_num artNum, writer_id writerId, title, content, reg_date regDate,
+        count from articles
+    </select>
+    <select
+        id="selectById"
+        resultType="com.example.demo.domains.ArticleDTO"
+        parameterType="string">
+        select art_num artNum, writer_id writerId, title, content, reg_date regDate,
+        count from articles where art_num like #{value}
+    </select>
+    <update id="updateCount" parameterType="string">
+         update articles set count = count + 1 where art_num like #{value}
+    </update>
+    <update id="update" parameterType="com.example.demo.domains.ArticleDTO">
+          update articles set title = #{title}, content = #{content} where art_num like #{artNum}
+    </update>
+    <delete id="delete" parameterType="com.example.demo.domains.ArticleDTO">
+         delete from articles where art_num like #{artNum}
+    </delete>
+</mapper>

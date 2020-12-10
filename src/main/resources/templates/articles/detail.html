@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {border: 1px solid black;}
+        table tr {border: 1px solid black;}
+        table tr td {border: 1px solid black;}
+        table tr th {border: 1px solid black;}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>DETAIL</h1>
+    <table class="table">
+        <thead>
+            <tr class="table-active">
+                <th style="width: 15%">No. <span id="artNum"></span></th>
+                <th style="width: 30%">작성자: <span id="writerId"></span></th>
+                <th style="width: 30%">작성일: <span id="regDate"></span></th>
+                <th style="width: 25%">조회수: <span id="count"></span><br></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td colspan="4" style="width: 100%; height: 30px;"><span id="title"></span></td><br>
+            <tr><td colspan="4" style="width: 100%;;">
+                <div id="content" style="height: 250px; width: 99%;">
+                </div></td></tr>
+                <tr id="toggle"><td></td></tr>
+        </tbody>
+    </table>
+    <script>
+        $.getJSON(`/articles/${localStorage.getItem('artNum')}`, d => {
+            $('#artNum').text(d.artNum)
+            $('#writerId').text(d.writerId)
+            $('#title').text(d.title)
+            $('#regDate').text(d.regDate)
+            $('#count').text(d.count)
+            $('#content').text(d.content)
+            $('#toggle').html('<button id="update-btn">수정하기</button><button id="delete-btn">삭제하기</button><button id="back-btn">목록보기</button><button id="home-btn">HOME</button>')
+            // 수정시에만 작동
+            $('#update-btn').click(e => { 
+                $('#title').html('<input id="update-title" type="text" value="'+d.title+'"/>')
+                $('#content').html('<textarea id="update-content" style="height: 250px">'+d.content+'</textarea>')
+                $('#toggle').html('<button id="confirm">수정완료</button>')
+                $('#confirm').click(e => {
+                    e.preventDefault()
+                    $.ajax({
+                        url: `/articles`,
+                        type: 'PUT',
+                        data: JSON.stringify({
+                            artNum: d.artNum,
+                            writerId: d.writerId,
+                            title: $('#update-title').val(),
+                            content: $('#update-content').val(),
+                            regDate: d.regDate,
+                            count: d.count
+                        }),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: d => {
+                            if(d.message === 'SUCCESS'){
+                                location.href = '/move/articles/detail'
+                            }else{
+                                alert(`수정 실패`)
+                            }
+                        },
+                        error: e => {alert(`수정 실패: ${e}`)}
+                    })
+                })
+            })
+            $('#delete-btn').click(e => {
+                e.preventDefault()
+                $.ajax({
+                    url: `/articles`,
+                    type: `DELETE`,
+                    data: JSON.stringify({
+                        artNum: d.artNum
+                    }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: d => {
+                        if(d.message === 'SUCCESS'){
+                            alert(`삭제 완료!`)
+                            location.href = '/move/articles/list'
+                        }else{
+                            alert('삭제 실패!')
+                        }
+                    },
+                    error: e => { alert(`삭제 실패: ${e}`) } 
+                })
+            })
+            $('#home-btn').click(e => {location.href="/"})
+            $('#back-btn').click(e => {location.href='/move/articles/list'})    
+        })
+    </script>
+</body>
+</html>
