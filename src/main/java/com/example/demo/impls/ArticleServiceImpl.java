@@ -30,22 +30,22 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleDTO> list() {
-        return articleRepository.selecAll();
+        return articleRepository.selectAll();
     }
 
     @Override
     public int crawling(String url) {
         var artBox = new Box<ArticleDTO>();
         artBox = crawler.crawling(url);
-        printer.accept("Box Size: " + artBox.size());
-
-        for(int i = 0 ; i < artBox.size() ; i++){
+        System.out.println("box size: "+artBox.size());
+        
+        for(int i =0; i< artBox.size(); i++){
             article = new ArticleDTO();
             article = artBox.get(i);
-            printer.accept("Article: " + article.toString());
+            System.out.println("Article : "+article.toString());
             String userid = ug.makeUserid();
-            printer.accept("작성자ID: " + userid);
-            article.setWriterId(ug.makeUserid());
+            System.out.println("글쓴이 아이디: "+userid);
+            article.setWriterId(ug.makeUserid()); 
             article.setCount("0");
             write(artBox.get(i));
         }

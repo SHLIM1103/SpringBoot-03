@@ -20,18 +20,20 @@ public class ArticleController {
     @Autowired Printer printer;
     @Autowired Proxy px;
     @Autowired ArticleService articleService;
+    
     @PostMapping("/ariticles")
     public Map<?, ?> write(@RequestBody ArticleDTO article){
         var map = px.hashmap();
-        int result = articleService.write(article);
-        map.put("message", px.message(result));
+        map.put("message", px.message(articleService.write(article)));
         return map;
     }
 
     @GetMapping("/articles")
     public Map<?, ?> list(){
         var map = px.hashmap();
-        map.put("list", articleService.list());
+        List<ArticleDTO> l = articleService.list();
+        System.out.println("목록 수: "+l.size());
+        map.put("list", l);
         map.put("count", articleService.count());
         return map;
     }
@@ -40,11 +42,11 @@ public class ArticleController {
     public Map<?,?> crawling(@PathVariable String site){
         var map = px.hashmap();
         var count = articleService.count();
-        if(count == 0){ 
+        if(count == 0){
             switch(site){
-            case "bugs":
-            map.put("count", articleService.crawling("https://music.bugs.co.kr/recomreview?&order=listorder&page=2"));
-            break;
+                case "bugs":
+                map.put("count", articleService.crawling("https://music.bugs.co.kr/recomreview?&order=listorder&page=2"));
+                break;
             }
         }else{
             map.put("count", count);
