@@ -1,5 +1,13 @@
 package com.example.demo.utils;
 
-public interface Printer {
-    
+import java.util.function.Consumer;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class Printer{
+    public void accept(Object t){
+        Consumer<String> c = System.out::print;
+        c.accept((String)t);
+    }
 }

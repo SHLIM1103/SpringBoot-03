@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 만들기 project!(since 20.12.22)</title>
+</head>
+<body>
+    <h1>HOME</h1>
+    <a id="write" href="#">글 작성하기</a><br>
+    <a id="list" href="#">글 목록하기</a><br>
+    <a id="crawling" href="#">웹 크롤링하기</a>
+    <script>
+        $(`#write`).click(location.href=`/move/article/write`)
+        $(`#list`).click(location.href=`/move/article/list`)
+        $(`#crawling`).click(location.href=`/move/article/crawling`)
+    </script>
+</body>
+</html>
